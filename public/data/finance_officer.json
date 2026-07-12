@@ -1,0 +1,45 @@
+[
+    {
+        "id": 1,
+        "title": "Logging In and Out",
+        "image":"",
+        "content": [
+            {
+                "type": "content",
+                "text": "To log into your account, do as follows: 1. Enter your Username and Password. 2. Then click Login button.",
+                "image": "Logging In and Out.png"
+            },
+            {
+                "type": "note",
+                "text": " If this is your first time logging into the system with a new temporary password, you will be asked to change your password and provide a security answer."
+            },
+            {
+                "type": "content",
+                "text": "On changing your password, please be reminded of the following rules: 1. Your password should be at least eight (8) and at most fifteen (15) characters long. 2. Your password should contain a combination of letters (A-Z, a-z), numbers (0-9). 3. Your password may or may not have special characters. 4. Password is case sensitive."
+            },
+            {
+                "type": "tip",
+                "image":"Logging In and Out - tip1.png",
+                "text": [
+                    {
+                        "1" : "In case of erroneous login information supplied, you will be asked to supply correct Captcha along with your logon credentials.",
+                        "2": " You can change the Captcha characters displayed by the system by clicking the refresh button.",
+                        "3": "You can click the audio icon to hear audio playback of Captcha character displayed.",
+                        "4": " Captcha characters are not case sensitive."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Electronic Billing and Collection System Main Menu",
+        "image": "Electronic Billing and Collection System Main Menu.png",
+        "content": [
+            {
+                "type":"note",
+                "text": "Access to eBCS functionalities will depend on the user's role assignment."
+            }
+        ]
+    }
+]
