@@ -1,7 +1,6 @@
 const Hero = () => {
     return (
         <section id="hero" className="hero section">
-
             <div className="container">
                 <div className="row gy-4">
                 <div className="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
