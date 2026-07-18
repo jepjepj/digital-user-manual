@@ -8,6 +8,7 @@ import '../../public/assets/vendor/swiper/swiper-bundle.min.css'
 import '../../public/assets/css/main.css'
 import Header from "./components/header";
 import Script from "next/script";
+import Hero from "./components/Hero";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,9 +35,11 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body>
+      <body className="index-page">
         <Header />
-        {children}
+        <main className="main">
+          {children}
+        </main>
 
         <a href="#" id="scroll-top" className="scroll-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short"></i></a>
 
