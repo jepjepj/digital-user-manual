@@ -1,5 +1,4 @@
 'use client'
-import Link from "next/link"
 import { useEffect, useState } from "react"
 
 const FinanceOfficer = () => {
@@ -49,7 +48,7 @@ const FinanceOfficer = () => {
                 {
                     manuals.map((row: any) => {
                         return (
-                            <div className="col-lg-4 col-md-6 col-sm-12" key={row.manual_id}>
+                            <div className="col-lg-4 col-md-4 col-sm-4" key={row.manual_id}>
                                 <section id="blog-posts" className="blog-posts section">
                                     <div className="container">
                                         <div className="row gy-4">
@@ -60,13 +59,17 @@ const FinanceOfficer = () => {
                                                 </div>
 
                                                 <h2 className="title">
-                                                <Link href={`finance-officer/${row.manual_id}`}>{row.manual_name}</Link>
+                                                <a href="images/">{row.manual_name}</a>
                                                 </h2>
 
                                                 <div className="content">
+                                                <p>
+                                                    Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta.
+                                                    Et eveniet enim. Qui velit est ea dolorem doloremque deleniti aperiam unde soluta. Est cum et quod quos aut ut et sit sunt. Voluptate porro consequatur assumenda perferendis dolore.
+                                                </p>
 
                                                 <div className="read-more">
-                                                    <Link href={`finance-officer/${row.manual_id}`}>Read More</Link>
+                                                    <a href="blog-details.html">Read More</a>
                                                 </div>
                                                 </div>
 

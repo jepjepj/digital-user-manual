@@ -2,10 +2,10 @@ const About = () => {
     return (
         <section id="about" className="about section">
 
-            <div className="container" data-aos="fade-up">
+            <div className="container">
                 <div className="row gx-0">
 
-                <div className="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+                <div className="col-lg-6 d-flex flex-column justify-content-center">
                     <div className="content">
                     <h3>About Digital User Manual</h3>
                     <h2> Welcome to Digital User Manual, a platform designed to transform traditional user manuals into interactive, multilingual learning experiences. </h2>
@@ -19,8 +19,8 @@ const About = () => {
                     </div>
                 </div>
 
-                <div className="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
-                    <img src="assets/img/about.jpg" className="img-fluid" alt="" />
+                <div className="col-lg-6 d-flex align-items-center" >
+                    <img src="/assets/img/about.jpg" className="img-fluid" />
                 </div>
 
                 </div>

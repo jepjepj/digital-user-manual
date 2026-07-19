@@ -1,7 +1,7 @@
 const Values = () => {
     return (
         <section id="values" className="values section">
-            <div className="container section-title" data-aos="fade-up">
+            <div className="container section-title">
                 <h2>Our Values</h2>
                 <p>What we value most<br /></p>
             </div>
@@ -10,7 +10,7 @@ const Values = () => {
 
                 <div className="row gy-4">
 
-                <div className="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div className="col-lg-4">
                     <div className="card">
                     <img src="assets/img/values-1.png" className="img-fluid" alt="" />
                     <h3>Multilingual Support</h3>
@@ -18,7 +18,7 @@ const Values = () => {
                     </div>
                 </div>
 
-                <div className="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div className="col-lg-4">
                     <div className="card">
                     <img src="assets/img/values-2.png" className="img-fluid" alt="" />
                     <h3>Interactive Learning</h3>
@@ -26,7 +26,7 @@ const Values = () => {
                     </div>
                 </div>
 
-                <div className="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                <div className="col-lg-4">
                     <div className="card">
                     <img src="assets/img/values-3.png" className="img-fluid" alt="" />
                     <h3>Accessible Anywhere</h3>
