@@ -64,12 +64,12 @@ const RemittingAgencyOfficer = () => {
                                                 </div>
 
                                                 <h2 className="title">
-                                                <Link href={`finance-officer/${row.manual_id}`}>{row.manual_name}</Link>
+                                                <Link href={`remitting-agency-officer/${row.manual_id}`}>{row.manual_name}</Link>
                                                 </h2>
 
                                                 <div className="content">
                                                     <div className="read-more">
-                                                        <Link href={`finance-officer/${row.manual_id}`}>Read More</Link>
+                                                        <Link href={`remitting-agency-officer/${row.manual_id}`}>Read More</Link>
                                                     </div>
                                                 </div>
 
