@@ -7,7 +7,7 @@ const Header = () => {
 
             <a href="/" className="logo d-flex align-items-center me-auto">
                 <img src="/assets/img/logo.png" alt="" />
-                <h1 className="sitename">Digital User Manual</h1>
+                <h1 className="sitename">Electronic User Manual</h1>
             </a>
 
             <nav id="navmenu" className="navmenu">
