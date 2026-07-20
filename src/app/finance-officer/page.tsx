@@ -45,7 +45,11 @@ const FinanceOfficer = () => {
             </nav>
         </div>
         <div className="container">
+            
+            <input type="text" className="form-control" autoComplete="off" placeholder="Search ..." style={{fontSize: "18px", marginTop: "20px", marginBottom: "5px", padding: "15px"}} />
+
             <div className="row">
+                
                 {
                     manuals.map((row: any) => {
                         return (
@@ -55,8 +59,8 @@ const FinanceOfficer = () => {
                                         <div className="row gy-4">
                                             <div className="col-12">
                                             <article>
-                                                <div className="post-img">
-                                                <img src={`images/${row.manual_image}`} alt="" className="img-fluid" />
+                                                <div className="post-img" style={{justifySelf: "center"}}>
+                                                <img src={`images/${(row.manual_image == "" || row.manual_image == null) ? 'default.png' : row.manual_image}`} alt="" className="img-fluid" />
                                                 </div>
 
                                                 <h2 className="title">
@@ -64,10 +68,9 @@ const FinanceOfficer = () => {
                                                 </h2>
 
                                                 <div className="content">
-
-                                                <div className="read-more">
-                                                    <Link href={`finance-officer/${row.manual_id}`}>Read More</Link>
-                                                </div>
+                                                    <div className="read-more">
+                                                        <Link href={`finance-officer/${row.manual_id}`}>Read More</Link>
+                                                    </div>
                                                 </div>
 
                                             </article>

@@ -8,3 +8,7 @@ export async function GET(req: NextRequest) {
     const manuals = await ManualService.getManuals(keyword)
     return NextResponse.json(manuals)
 }
+
+export async function POST() {
+    
+}

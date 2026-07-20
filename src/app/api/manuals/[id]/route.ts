@@ -1,7 +1,11 @@
 import ManualService from "@/services/ManualServices";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> } ) {
+interface routerProps {
+    params: Promise<{ id: string }>
+}
+
+export async function GET(req: NextRequest, { params }: routerProps ) {
     const { id } = await params
 
     const manual = await ManualService.getManualById(Number(id))

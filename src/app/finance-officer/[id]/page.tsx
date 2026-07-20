@@ -1,87 +1,94 @@
 'use client'
+import Link from "next/link"
+import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 
 const FinanceOfficer = () => {
-    const [manuals, setManuals] = useState<any>([])
-    const manual_type = "FO"
+    const { id } = useParams<{ id: string }>()
+    const [manual_contents, setManualContent] = useState<any>([])
 
     useEffect(() => {
-        getManuals()
+        getContent()
     }, [])
 
-    async function getManuals(){
-        const response = await fetch(`/api/manuals?type=${manual_type}`)
-        const data = await response.json()
-        setManuals(data)
+    async function getContent(){
+        try {
+            const response = await fetch(`/api/manuals/${id}`)
+            const data = await response.json()
+            setManualContent(data)
+        } catch (error) {
+            console.log(error)
+        }
     }
     return (
         
         <>
         <div className="page-title">
-            <div className="heading">
-                <div className="container">
-                <div className="row d-flex justify-content-center text-center">
-                    <div className="col-lg-8">
-                        <h1>Electronic Billing and Collection System (eCBS) Manual - Finance Officer</h1>
-                        <div className="mb-0">
-                            <p>GSIS Electronic Billing and Collection System is a web-based application that facilitates the dissemination of billing files to remitting agencies and supports submission and payment of remittances.  The application is publicly accessible to remitting agency users.  Username and password pair is provided to system users to access the system.</p>
-                            
-                            <p>The application interfaces with several bank system accredited by GSIS to facilitate the payment of remittances.  It also interfaces with existing GSIS systems to synchronize remitting agency and remittance payment data.</p>
-                            
-                            <p>This user manual serves as a guide for eBCS users to the different functionalities of the system.</p>
-                        </div>
-                    </div>
-                </div>
+            <div className="heading" style={{padding: "80px 0 0px 0"}}>
+                <div className="justify-content-center text-center">
+                    <h1>{manual_contents?.manual_name}</h1>
                 </div>
             </div>
-            <nav className="breadcrumbs">
-                <div className="container">
-                    <ol>
-                        <li><a href="/">Home</a></li>
-                        <li className="current">Electronic Billing and Collection System (eCBS) Manual - Finance Officer</li>
-                    </ol>
-                </div>
-            </nav>
         </div>
         <div className="container">
             <div className="row">
-                {
-                    manuals.map((row: any) => {
-                        return (
-                            <div className="col-lg-4 col-md-4 col-sm-4" key={row.manual_id}>
-                                <section id="blog-posts" className="blog-posts section">
-                                    <div className="container">
-                                        <div className="row gy-4">
-                                            <div className="col-12">
-                                            <article>
-                                                <div className="post-img">
-                                                <img src={`images/${row.manual_image}`} alt="" className="img-fluid" />
+                <section id="blog-details" className="blog-details section" style={{paddingBottom: "10px"}}>
+                    <div className="container">
+                        <article className="article">
+                            {
+
+                                manual_contents?.contents?.map((row: any) => {
+                                    return (
+                                        <div key={row.content_id}>
+                                            {row.content_img && (
+                                                <div className="post-img" style={{justifySelf: "center", marginTop: "10px", marginBottom: "10px"}}>
+                                                    <img src={`/images/${row.content_img}`} alt="" className="img-fluid" />
+                                                    <br />
                                                 </div>
+                                            )}
 
-                                                <h2 className="title">
-                                                <a href="images/">{row.manual_name}</a>
-                                                </h2>
+                                            <h2 className="title">{row.title}</h2>
 
-                                                <div className="content">
-                                                <p>
-                                                    Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta.
-                                                    Et eveniet enim. Qui velit est ea dolorem doloremque deleniti aperiam unde soluta. Est cum et quod quos aut ut et sit sunt. Voluptate porro consequatur assumenda perferendis dolore.
-                                                </p>
+                                            <div className="content">
+                                                {
+                                                    row.content_type == "content" && (
+                                                        <p>
+                                                            {row.content}
+                                                        </p>
+                                                    )
+                                                }
 
-                                                <div className="read-more">
-                                                    <a href="blog-details.html">Read More</a>
-                                                </div>
-                                                </div>
+                                                {
+                                                    row.content_type == "note" && (
+                                                        <blockquote>
+                                                            <p>
+                                                            {row.content}
+                                                            </p>
+                                                        </blockquote>
+                                                    )
+                                                }
 
-                                            </article>
+                                                {
+                                                    row.content_type == "tip" && (
+                                                        <>
+                                                        <h3>Tip</h3>
+                                                        <p>
+                                                            {row.content}
+                                                        </p>
+                                                        </>
+                                                    )
+                                                }
+                                                
                                             </div>
                                         </div>
-                                    </div>
-                                </section>
-                            </div>
-                        )
-                    })
-                }
+                                    )
+                                })
+                            }
+
+                        </article>
+
+                    </div>
+                </section>
             </div>
         </div>
         </>
