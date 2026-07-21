@@ -8,6 +8,8 @@ interface routerProps {
 export async function GET(req: NextRequest, { params }: routerProps ) {
     const { id } = await params
 
-    const manual = await ManualService.getManualById(Number(id))
+    const language = req.nextUrl.searchParams.get("language") ?? "en";
+
+    const manual = await ManualService.getManualById(Number(id), language)
     return NextResponse.json(manual)
 }

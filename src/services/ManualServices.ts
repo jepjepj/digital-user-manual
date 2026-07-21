@@ -5,7 +5,12 @@ export default class ManualService {
         return await ManualRepository.getAll(manual_type)
     }
 
-    static async getManualById(id: number) {
-        return await ManualRepository.getById(id)
+    static async getManualById(id: number, language: string = "en") {
+        if (language === "en") {
+            return await ManualRepository.getById(id);
+        }
+
+        return await ManualRepository.getByLanguage(id, language)
+        
     }
 }

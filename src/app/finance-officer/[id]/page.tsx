@@ -6,6 +6,8 @@ import { useEffect, useState } from "react"
 const FinanceOfficer = () => {
     const { id } = useParams<{ id: string }>()
     const [manual_contents, setManualContent] = useState<any>([])
+    const [full_text, setFullText] = useState("")
+    const [language, setLanguage] = useState("en")
 
     useEffect(() => {
         getContent()
@@ -16,10 +18,18 @@ const FinanceOfficer = () => {
             const response = await fetch(`/api/manuals/${id}`)
             const data = await response.json()
             setManualContent(data)
+
+            const text = data?.contents.map((item: any) => {
+                return `${item.title ?? ""}\n${item.content ?? ""}`;
+            }).join("\n\n");
+
+            setFullText(text);
+
         } catch (error) {
             console.log(error)
         }
     }
+    
     return (
         
         <>
@@ -36,7 +46,6 @@ const FinanceOfficer = () => {
                     <div className="container">
                         <article className="article">
                             {
-
                                 manual_contents?.contents?.map((row: any) => {
                                     return (
                                         <div key={row.content_id}>
