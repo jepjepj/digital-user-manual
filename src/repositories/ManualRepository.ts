@@ -41,23 +41,21 @@ export default class ManualRepository {
     static async insertContent(content_id: number, language: string) {
         const [row]: any = await db.query("SELECT * FROM tbl_content_translations WHERE content_id=? AND language=?", [content_id, language])
 
+        let translatedTitle = ""
+        let translatedContent = ""
+
         if(row.length === 0){
             const [content_row]: any = await db.query("SELECT * FROM tbl_content WHERE content_id=?", [content_id])
-            let translatedTitle = ""
 
-            if (content_row.length > 0){
-                translatedTitle = await TranslateServices.translate(content_row.title, language)
-            } else {
-                translatedTitle = ""
+            if (content_row.length === 0) {
+                return;
             }
 
-            return translatedTitle
+            const content = content_row[0];
+            translatedTitle = await TranslateServices.translate(content.title, language)
+            translatedContent = await TranslateServices.translate(content.content, language)
 
-            // const translatedTitle = await TranslateServices.translate(content_row.title, language)
-            
-            // const translatedContent = await TranslateServices.translate(content_row.content, language)
-
-            // await db.execute("INSERT INTO tbl_content_translations (content_id, manual_id, language, content_type, title, content, content_img) VALUES (?, ?, ?, ?, ?, ?, ?)", [content_row.content_id, content_row.manual_id, language, content_row.content_type, translatedTitle, translatedContent, content_row.content_img]);
+            await db.execute("INSERT INTO tbl_content_translations (content_id, manual_id, language, content_type, title, content, content_img) VALUES (?, ?, ?, ?, ?, ?, ?)", [content.content_id, content.manual_id, language, content.content_type, translatedTitle, translatedContent, content.content_img]);
         }
     }
 
@@ -65,10 +63,10 @@ export default class ManualRepository {
         const [content_rows]: any = await db.query("SELECT * FROM tbl_content c LEFT JOIN tbl_manuals m ON c.manual_id=m.manual_id WHERE c.manual_id=?", [id])
         
         for (const item of content_rows) {
-            return await this.insertContent(Number(item.content_id), language)
+            await this.insertContent(Number(item.content_id), language)
         }
         
-        const [rows]: any = await db.query("SELECT * FROM tbl_content_translations c LEFT JOIN tbl_manuals m ON c.manual_id=m.manual_id WHERE c.manual_id=?", [id])
+        const [rows]: any = await db.query("SELECT * FROM tbl_content_translations c LEFT JOIN tbl_manuals m ON c.manual_id=m.manual_id WHERE c.manual_id=? AND c.language=?", [id, language])
 
         const manuals = {
             manual_id: rows[0].manual_id,
