@@ -1,10 +1,11 @@
 'use client'
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 const RemittingAgencyOfficer = () => {
     const [manuals, setManuals] = useState<any>([])
     const manual_type = "RAO"
+    const [search, setSearch] = useState("")
 
     useEffect(() => {
         getManuals()
@@ -15,6 +16,17 @@ const RemittingAgencyOfficer = () => {
         const data = await response.json()
         setManuals(data)
     }
+
+    const filteredContent = useMemo(() => {
+        if (!search.trim()) return manuals;
+
+        const keyword = search.toLowerCase();
+
+        return manuals.filter((item: any) => (
+            item.manual_name?.toLowerCase().includes(keyword)
+        ));
+    }, [manuals, search]);
+
     return (
         
         <>
@@ -23,7 +35,7 @@ const RemittingAgencyOfficer = () => {
                 <div className="container">
                 <div className="row d-flex justify-content-center text-center">
                     <div className="col-lg-8">
-                        <h1>Electronic Billing and Collection System (eCBS) Manual - Remitting Agency Officer</h1>
+                        <h1>Electronic Billing and Collection System (eCBS) Manual - Finance Officer</h1>
                         <div className="mb-0">
                             <p>GSIS Electronic Billing and Collection System is a web-based application that facilitates the dissemination of billing files to remitting agencies and supports submission and payment of remittances.  The application is publicly accessible to remitting agency users.  Username and password pair is provided to system users to access the system.</p>
                             
@@ -39,19 +51,19 @@ const RemittingAgencyOfficer = () => {
                 <div className="container">
                     <ol>
                         <li><a href="/">Home</a></li>
-                        <li className="current">Electronic Billing and Collection System (eCBS) Manual - Remitting Agency Officer</li>
+                        <li className="current">Electronic Billing and Collection System (eCBS) Manual - Finance Officer</li>
                     </ol>
                 </div>
             </nav>
         </div>
         <div className="container">
             
-            <input type="text" className="form-control" autoComplete="off" placeholder="Search ..." style={{fontSize: "18px", marginTop: "20px", marginBottom: "5px", padding: "15px"}} />
+            <input type="text" className="form-control" autoComplete="off" placeholder="Search ..." style={{fontSize: "18px", marginTop: "20px", marginBottom: "5px", padding: "15px"}} onChange={(e) => setSearch(e.target.value)} />
 
             <div className="row">
                 
                 {
-                    manuals.map((row: any) => {
+                    filteredContent.map((row: any) => {
                         return (
                             <div className="col-lg-4 col-md-6 col-sm-12" key={row.manual_id}>
                                 <section id="blog-posts" className="blog-posts section">
@@ -64,12 +76,12 @@ const RemittingAgencyOfficer = () => {
                                                 </div>
 
                                                 <h2 className="title">
-                                                <Link href={`remitting-agency-officer/${row.manual_id}`}>{row.manual_name}</Link>
+                                                <Link href={`finance-officer/${row.manual_id}`}>{row.manual_name}</Link>
                                                 </h2>
 
                                                 <div className="content">
                                                     <div className="read-more">
-                                                        <Link href={`remitting-agency-officer/${row.manual_id}`}>Read More</Link>
+                                                        <Link href={`finance-officer/${row.manual_id}`}>Read More</Link>
                                                     </div>
                                                 </div>
 

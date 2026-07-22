@@ -1,10 +1,11 @@
 'use client'
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 const FinanceOfficer = () => {
     const [manuals, setManuals] = useState<any>([])
     const manual_type = "FO"
+    const [search, setSearch] = useState("")
 
     useEffect(() => {
         getManuals()
@@ -15,6 +16,17 @@ const FinanceOfficer = () => {
         const data = await response.json()
         setManuals(data)
     }
+
+    const filteredContent = useMemo(() => {
+        if (!search.trim()) return manuals;
+
+        const keyword = search.toLowerCase();
+
+        return manuals.filter((item: any) => (
+            item.manual_name?.toLowerCase().includes(keyword)
+        ));
+    }, [manuals, search]);
+
     return (
         
         <>
@@ -46,12 +58,12 @@ const FinanceOfficer = () => {
         </div>
         <div className="container">
             
-            <input type="text" className="form-control" autoComplete="off" placeholder="Search ..." style={{fontSize: "18px", marginTop: "20px", marginBottom: "5px", padding: "15px"}} />
+            <input type="text" className="form-control" autoComplete="off" placeholder="Search ..." style={{fontSize: "18px", marginTop: "20px", marginBottom: "5px", padding: "15px"}} onChange={(e) => setSearch(e.target.value)} />
 
             <div className="row">
                 
                 {
-                    manuals.map((row: any) => {
+                    filteredContent.map((row: any) => {
                         return (
                             <div className="col-lg-4 col-md-6 col-sm-12" key={row.manual_id}>
                                 <section id="blog-posts" className="blog-posts section">
