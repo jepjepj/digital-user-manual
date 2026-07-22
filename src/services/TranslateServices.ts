@@ -1,6 +1,4 @@
 import { translate } from "google-translate-api-x";
-import { NextResponse } from "next/server";
-import OpenAI from "openai";
 
 export default class TranslateServices {
     // static async translate (content: string, language: string) {
